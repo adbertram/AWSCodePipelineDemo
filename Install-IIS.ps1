@@ -1,5 +1,11 @@
 $ErrorActionPreference = 'Stop'
 
-Import-Module 'C:\Windows\system32\WindowsPowerShell\v1.0\Modules\ServerManager\ServerManager.psd1'
+if ($PSHOME -like "SysWOW64") {
+ Write-Warning "Restarting this script under 64-bit Windows PowerShell."
+
+	& (Join-Path ($PSHOME -replace "SysWOW64", "SysNative") powershell.exe) -File ` (Join-Path $PSScriptRoot $MyInvocation.MyCommand) @args
+
+	Exit $LastExitCode 
+}
 
 Add-WindowsFeature Web-Server
