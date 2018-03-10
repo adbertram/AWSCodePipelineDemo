@@ -1,2 +1,2 @@
 $ErrorActionPreference = 'Stop'
-Install-WindowsFeature Web-Server
+Add-WindowsFeature Web-Server
